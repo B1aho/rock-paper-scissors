@@ -19,7 +19,9 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    return (window.prompt("Enter the word: Rock, Pape or Scissors. Capitalization not matter!", "rock")).toUpperCase();
+    let res = 0;
+    while (res !== "ROCK" && res !== "PAPER" && res !== "SCISSORS") {
+        res = window.prompt("Enter the word: Rock, Pape or Scissors. Capitalization not matter!", "rock").toUpperCase();
+    }
+    return res;
 }
-
-console.log(getComputerChoice()); 
