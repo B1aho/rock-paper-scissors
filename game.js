@@ -1,3 +1,5 @@
+let humanScore = compScore = 0;
+
 function getComputerChoice() {
     let res = (Math.floor(Math.random() * 3) + 1);
     switch (res) {
@@ -24,4 +26,14 @@ function getHumanChoice() {
         res = window.prompt("Enter the word: Rock, Pape or Scissors. Capitalization not matter!", "rock").toUpperCase();
     }
     return res;
+}
+
+function playGame() {
+    while (humanScore !== 0 && compScore !== 0) {
+        playRound();
+    }
+    if (humanScore === 3)
+        alert("You win, congratulations!");
+    else 
+        alert("You lose! Rerun page if you want try again..");
 }
