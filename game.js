@@ -29,11 +29,28 @@ function getHumanChoice() {
 }
 
 function playGame() {
-    while (humanScore !== 0 && compScore !== 0) {
-        playRound();
+    while (humanScore !== 3 && compScore !== 3) {
+        playRound(getHumanChoice(), getComputerChoice());
     }
     if (humanScore === 3)
         alert("You win, congratulations!");
     else 
         alert("You lose! Rerun page if you want try again..");
 }
+
+function playRound(hChoice, pcChoice) {
+    if (hChoice === pcChoice) {
+        humanScore++;
+        compScore++;
+        alert(`DRAW: Your - ${hChoice} vs Comp - ${pcChoice}. Score is ${humanScore}:${pcChoice}`);
+    } else if (hChoice === "PAPER" && pcChoice === "ROCK" || hChoice === "SCISSORS" && pcChoice === "PAPER" ||
+      hChoice === "ROCK" && pcChoice === "SCISSORS") {
+        humanScore++;
+        alert(`You win the round: Your - ${hChoice} vs Comp - ${pcChoice}. Score is ${humanScore} : ${compScore}`);
+    }  else {
+        compScore++;
+        alert(`You lose the round: Your - ${hChoice} vs Comp - ${pcChoice}. Score is ${humanScore} : ${compScore}`);
+    } 
+}
+
+playGame();
