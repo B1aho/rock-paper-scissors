@@ -21,15 +21,29 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let res = 0;
-    while (res !== "ROCK" && res !== "PAPER" && res !== "SCISSORS") {
-        res = window.prompt("Enter the word: Rock, Paper or Scissors. Capitalization not matter!").toUpperCase();
-    }
-    return res;
+    const btnDiv = document.querySelector(".container-btn");
+    btnDiv.addEventListener("click", (event) => {
+        let res;
+        switch (event.target.id) {
+            case "paper":
+            res = "PAPER";
+            break;
+
+            case "rock":
+            res = "ROCK";
+            break;
+
+            case "scissors":
+            res = "SCISSORS";
+            break;
+
+            default: break;
+        }
+    });
 }
 
 function playGame() {
-    while (humanScore !== 3 && compScore !== 3) {
+    while (humanScore !== 5 && compScore !== 5) {
         playRound(getHumanChoice(), getComputerChoice());
     }
     if (humanScore === 3)
