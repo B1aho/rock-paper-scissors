@@ -28,12 +28,13 @@ function checkScore() {
     while (humanScore !== 5 && compScore !== 5) {
         playRound(getHumanChoice(), getComputerChoice());
     }
-    if (humanScore === 3)
+    if (humanScore === 5)
         alert("You win, congratulations!");
     else 
         alert("You lose! Rerun page if you want try again..");
 }
 
+// Event handler function that change global score and check it every round
 function playRound(event) {
     let hChoice = event.target.id;
     let pcChoice = getComputerChoice();
