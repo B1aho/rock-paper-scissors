@@ -1,6 +1,6 @@
 let humanScore = compScore = 0;
 const btnDiv = document.querySelector(".container-btn");
-
+const scoreDiv = document.querySelector(".score");
 // To avoid multiple event listeners for every button, I choose event delegation approach
 btnDiv.addEventListener("click", playRound);
 
@@ -28,11 +28,11 @@ function getComputerChoice() {
 function checkScore() {
     if (humanScore === 5 || compScore === 5) {
         if (humanScore === 5 && compScore === 5)
-            alert("Draw, no winner - no loser!");
+            scoreDiv.textContent = "Draw. No winners - no losers!";
         else if (humanScore === 5)
-            alert("You win, congratulations!");
+            scoreDiv.textContent = "You win, congratulations!";
         else if (compScore === 5)
-            alert("You lose!");
+            scoreDiv.textContent = "You lose! Computer win..";
         reloadPage();
     }
 }
@@ -44,19 +44,21 @@ function playRound(event) {
     if (hChoice === pcChoice) {
         humanScore++;
         compScore++;
-        alert(`DRAW: ${hChoice} vs ${pcChoice}. Current score = ${humanScore} : ${compScore}`);
+        scoreDiv.textContent = `DRAW: ${hChoice} vs ${pcChoice}. Current score = ${humanScore} : ${compScore}`;
     } else if (hChoice === "PAPER" && pcChoice === "ROCK" || hChoice === "SCISSORS" && pcChoice === "PAPER" ||
       hChoice === "ROCK" && pcChoice === "SCISSORS") {
         humanScore++;
-        alert(`You win the round: ${hChoice} beats ${pcChoice}. Current score = ${humanScore} : ${compScore}`);
+        scoreDiv.textContent = 
+            `You win the round: ${hChoice} beats ${pcChoice}. Current score = ${humanScore} : ${compScore}`;
     }  else {
         compScore++;
-        alert(`You lose the round: ${pcChoice} beats ${hChoice}. Current score = ${humanScore} : ${compScore}`);
+        scoreDiv.textContent = 
+        `You lose the round: ${pcChoice} beats ${hChoice}. Current score = ${humanScore} : ${compScore}`;
     } 
     checkScore();
 }
 
 function reloadPage() {
-    alert("Page will be refreshed for new game!");
-    document.location.reload();
+    scoreDiv.textContent += "Page will be refreshed for a new game in 5 seconds!";
+    setTimeout(function() {document.location.reload();}, 5000);
 }
