@@ -1,4 +1,8 @@
 let humanScore = compScore = 0;
+const btnDiv = document.querySelector(".container-btn");
+// To avoid multiple event listeners for every button, I choose event delegation approach
+btnDiv.addEventListener("click", playRound);
+
 
 function getComputerChoice() {
     let res = (Math.floor(Math.random() * 3) + 1);
@@ -20,29 +24,7 @@ function getComputerChoice() {
     return res;
 }
 
-function getHumanChoice() {
-    const btnDiv = document.querySelector(".container-btn");
-    btnDiv.addEventListener("click", (event) => {
-        let res;
-        switch (event.target.id) {
-            case "paper":
-            res = "PAPER";
-            break;
-
-            case "rock":
-            res = "ROCK";
-            break;
-
-            case "scissors":
-            res = "SCISSORS";
-            break;
-
-            default: break;
-        }
-    });
-}
-
-function playGame() {
+function checkScore() {
     while (humanScore !== 5 && compScore !== 5) {
         playRound(getHumanChoice(), getComputerChoice());
     }
@@ -52,7 +34,9 @@ function playGame() {
         alert("You lose! Rerun page if you want try again..");
 }
 
-function playRound(hChoice, pcChoice) {
+function playRound(event) {
+    let hChoice = event.target.id;
+    let pcChoice = getComputerChoice();
     if (hChoice === pcChoice) {
         humanScore++;
         compScore++;
@@ -65,6 +49,5 @@ function playRound(hChoice, pcChoice) {
         compScore++;
         alert(`You lose the round: ${pcChoice} beats ${hChoice}. Current score = ${humanScore} : ${compScore}`);
     } 
+    checkScore();
 }
-
-playGame();
